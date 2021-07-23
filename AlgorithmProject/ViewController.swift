@@ -20,10 +20,15 @@ class ViewController: UIViewController {
         let target = 3
         print("二分法\(searchTargetTwo(num: num, target: target))")
         
-        //
+        // 双指针
         var num1 = [0,1,2,2,3,0,4,2]
         let target1 = 2
         print("移除相同的数\(removeTargrt(num: &num1, targrt: target1))")
+        
+        var num2 = [44,-7,-3,2,3,11,7,0]
+        print("平方后的新数组\(getNewArray(num: &num2))")
+        
+        
     }
     // MARK:- 数组
     /*
@@ -102,6 +107,46 @@ class ViewController: UIViewController {
         }
         return slowIndex
     }
+    /*
+     给你一个按 非递减顺序 排序的整数数组 nums，返回 每个数字的平方 组成的新数组，要求也按 非递减顺序 排序。
 
+     示例 1： 输入：nums = [-4,-1,0,3,10] 输出：[0,1,9,16,100] 解释：平方后，数组变为 [16,1,0,9,100]，排序后，数组变为 [0,1,9,16,100]
+
+     示例 2： 输入：nums = [44，-7,-3,2,3,11,7,0,] 输出：[0, 4, 9, 9, 49, 49, 121, 1936]
+     */
+    fileprivate func getNewArray(num: inout [Int]) -> [Int] {
+        for (index,item) in num.enumerated() {
+            num[index] = item*item
+        }
+        // 快速排序
+        return qucikSort(&num, 0, num.count - 1)
+    }
+    // 快速排序
+    public func qucikSort(_ array: inout [Int], _ p: Int, _ r: Int) -> [Int] {
+        // 需要排序的区间只包含一个数字，则不需要重排数组，直接返回
+        if p >= r { return array }
+        let i = partition(&array, p, r)
+        // 分界左边排序
+        let num1 = qucikSort(&array, p, i-1)
+        // 分界右边排序
+        let num2 = qucikSort(&array, i+1, r)
+        print("  i  ----- \(i) \n  左边------ \(num1) \n  右边------ \(num2)")
+        return array
+    }
+    // 原地分区函数(array: 待分区数组, p: 起始下标, r: 结束下标) 分界点选取最后一个元素
+    // [1936, 49, 9, 4, 9, 121, 49, 0]
+    private func partition(_ array: inout [Int], _ p: Int, _ r: Int) -> Int {
+        let pivot = array[r]
+        var i = p
+        for j in p...r-1 {
+            if array[j] < pivot {
+                // 交换数组下标为 i、j 的元素
+                array.swapAt(i, j)
+                i += 1
+            }
+        }
+        array.swapAt(i, r);
+        return i
+    }
 }
 
