@@ -26,8 +26,10 @@ class ViewController: UIViewController {
         print("移除相同的数\(removeTargrt(num: &num1, targrt: target1))")
         
         var num2 = [44,-7,-3,2,3,11,7,0]
-        print("平方后的新数组\(getNewArray(num: &num2))")
+        print("平方后的新数组 方法1 \(getNewArray(num: &num2))")
         
+        let num3 = [44,-7,-3,2,3,11,7,0]
+        print("平方后的新数组 方法2 \(getNewArrayTwo(num: num3))")
         
     }
     // MARK:- 数组
@@ -147,6 +149,29 @@ class ViewController: UIViewController {
         }
         array.swapAt(i, r);
         return i
+    }
+    // 双指针
+    fileprivate func getNewArrayTwo(num: [Int]) -> [Int] {
+        let size = num.count
+        var newNum = Array<Int?>(repeating: nil, count: size)
+
+        var left = 0
+        var right = size - 1
+        
+        while left <= right {
+            if num[left]*num[left] < num[right]*num[right] {
+                newNum[right] = num[right]*num[right]
+                right -= 1
+            } else {
+                newNum[right] = num[left]*num[left]
+                left += 1
+            }
+        }
+        if let resultNum = newNum as? [Int] {
+            return resultNum
+        } else {
+            return num
+        }
     }
 }
 
