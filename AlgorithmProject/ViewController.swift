@@ -26,7 +26,10 @@ class ViewController: UIViewController {
         print("移除相同的数\(removeTargrt(num: &num1, targrt: target1))")
         
         var num2 = [44,-7,-3,2,3,11,7,0]
-        print("平方后的新数组\(getNewArray(num: &num2))")
+        print("平方后的新数组1 \(getNewArray(num: &num2))")
+        
+        var num3 = [44,-7,-3,2,3,11,7,0]
+        print("平方后的新数组2 \(getNewArrayTwo(num: &num3))")
         
         
     }
@@ -125,6 +128,7 @@ class ViewController: UIViewController {
     public func qucikSort(_ array: inout [Int], _ p: Int, _ r: Int) -> [Int] {
         // 需要排序的区间只包含一个数字，则不需要重排数组，直接返回
         if p >= r { return array }
+        // 新的分界点
         let i = partition(&array, p, r)
         // 分界左边排序
         let num1 = qucikSort(&array, p, i-1)
@@ -147,6 +151,14 @@ class ViewController: UIViewController {
         }
         array.swapAt(i, r);
         return i
+    }
+    // 双指针法
+    fileprivate func getNewArrayTwo(num: inout [Int]) -> [Int] {
+        for (index,item) in num.enumerated() {
+            num[index] = item*item
+        }
+        // 快速排序
+        return qucikSort(&num, 0, num.count - 1)
     }
 }
 
