@@ -47,6 +47,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
     }
+}
 
 class ListCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
