@@ -216,8 +216,8 @@ class LB: UIViewController {
                 }
                 offSet -= 1
             }
-            var temFirstNode = temNode
-            var temSecondNode = secondNode
+            var temFirstNode = firstNode
+            var temSecondNode = temNode
             while firstLength > 0 {
                 if sg_equateableAnyObject(object1: temFirstNode, object2: temSecondNode) {
                     return temFirstNode
