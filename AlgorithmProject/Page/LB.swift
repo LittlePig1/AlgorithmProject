@@ -20,18 +20,20 @@ class LB: UIViewController {
         let node3 = Node(3)
         let node4 = Node(4)
         let node5 = Node(5)
+        let node9 = Node(9)
 
         node0.next = node1
         node1.next = node2
         node2.next = node3
         node3.next = node4
         node4.next = node5
+        node5.next = node9
 
 //        removeTargat1(6, headNode: &node0)
 //        removeTargat2(6, headNode: &node0)
 
         // 反转一个单链表
-//        print("反转一个单链表---\(reverseList(headNode: &node0))")
+        print("反转一个单链表---\(reverseList(headNode: node0))")
         
         // 交换其中相邻的节点
 //        print("交换其中相邻的节点---\(getNewExchangeListNode(headNode: &node0))")
@@ -42,7 +44,13 @@ class LB: UIViewController {
         
         node6.next = node7
         node7.next = node1
-        print("两个链表是否有交点---\(getIntersectionNode(firstNode: node1, secondNode: node6))")
+        
+//        print("两个链表是否有交点---\(getIntersectionNode(firstNode: node1, secondNode: node6))")
+//        print("删除链表的倒数第 n 个结点---\(removeInputTargetPro(4, headNode: &node0))")
+        
+        // 判断入环点
+//        node9.next = node4
+//        print("链表开始入环的第一个节---\(firstIntoCicleNode(headNode: node6))")
     }
     /*
      题：删除链表中等于给定值 val 的所有节点。
@@ -107,25 +115,18 @@ class LB: UIViewController {
      示例: 输入: 1->2->3->4->5->NULL 输出: 5->4->3->2->1->NULL
      */
     // 双指针
-    fileprivate func reverseList(headNode: inout Node) -> Node{
+    fileprivate func reverseList(headNode: Node?) -> Node?{
         var cur = headNode
         var pre: Node?
         var tem: Node?
-        while cur.next != nil {
-            tem = cur.next
-            cur.next = pre
+        while cur != nil {
+            tem = cur?.next
+            cur?.next = pre
             pre = cur
-            cur = tem!
+            cur = tem
         }
-        if cur.next == nil {
-            tem = cur.next
-            cur.next = pre
-            pre = cur
-            if tem != nil {
-                cur = tem!
-            }
-        }
-        return pre!
+        
+        return pre
     }
     /*
      给定一个链表，两两交换其中相邻的节点，并返回交换后的链表
@@ -251,6 +252,109 @@ class LB: UIViewController {
             return false
         }
     }
+    
+    /*
+     给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
+
+     进阶：你能尝试使用一趟扫描实现吗？
+     */
+    fileprivate func removeInputTarget(_ target: Int, headNode: inout Node) -> Node{
+        // 常规操作
+        var length = 1
+        var temLengthNode = headNode
+        while temLengthNode.next != nil {
+            length += 1
+            if let node = temLengthNode.next {
+                temLengthNode = node
+            }
+        }
+        var tem = headNode
+        while length - target >= 0 {
+            if length == target + 1{
+                tem.next = tem.next?.next
+            } else {
+                if let node = tem.next {
+                    tem = node
+                }
+            }
+            length -= 1
+        }
+        return headNode
+    }
+    // 进阶版
+    /*
+     双指针的经典应用，如果要删除倒数第n个节点，让fast移动n步，然后让fast和slow同时移动，直到fast指向链表末尾。删掉slow所指向的节点就可以了
+     */
+    fileprivate func removeInputTargetPro(_ target: Int, headNode: inout Node) -> Node{
+        var slowNode = headNode
+        var fastNode = headNode
+        var offSet = target
+        while offSet > 0 {
+            if let node = fastNode.next {
+                fastNode = node
+            }
+            offSet -= 1
+        }
+        while fastNode.next != nil {
+            if let node = fastNode.next {
+                fastNode = node
+            }
+            if let node = slowNode.next {
+                slowNode = node
+            }
+        }
+        slowNode.next = slowNode.next?.next
+        return headNode
+    }
+    /*
+     题意： 给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。
+     为了表示给定链表中的环，使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。
+     说明：不允许修改给定的链表。
+     */
+    fileprivate func firstIntoCicleNode(headNode: Node) -> Node? {
+        let temHeaderNode = Node(0)
+        temHeaderNode.next = headNode
+        
+        var fastNode = temHeaderNode
+        var slowNode = temHeaderNode
+        var meetNode: Node?
+        
+        while fastNode.next != nil {
+            if let node = fastNode.next?.next {
+                fastNode = node
+            } else {
+                return nil
+            }
+            if let node = slowNode.next {
+                slowNode = node
+            } else {
+                return nil
+            }
+            // 获取相遇的节点
+            if sg_equateableAnyObject(object1: fastNode, object2: slowNode) {
+                meetNode = fastNode
+                break
+            }
+        }
+        // 获取入环的第一个节点
+        var otherNode = temHeaderNode
+        var inNode: Node?
+        while otherNode.next != nil {
+            if let node = otherNode.next {
+                otherNode = node
+            }
+            if let node = meetNode!.next {
+                meetNode = node
+            }
+            // 获取相遇的节点
+            if sg_equateableAnyObject(object1: otherNode, object2: meetNode!) {
+                inNode = meetNode
+                break
+            }
+        }
+        return inNode
+    }
+    
 }
 // 链表节点
 class Node {

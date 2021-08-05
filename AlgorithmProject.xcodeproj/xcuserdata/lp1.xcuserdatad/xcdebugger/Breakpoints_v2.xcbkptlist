@@ -7,96 +7,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "82EE16CD-EADF-456B-BC18-9C41DDB1D06A"
+            uuid = "305FB5B7-3367-4BDA-9A9E-E5CBE361CD55"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AlgorithmProject/Page/LB.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
-            landmarkName = "getIntersectionNode(firstNode:secondNode:)"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
+            landmarkName = "firstIntoCicleNode(headNode:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "DCFD9933-2D72-4BB8-B227-CC563C415662"
+            uuid = "D258E72A-1868-407F-9A90-8D157762027A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AlgorithmProject/Page/LB.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
-            landmarkName = "getIntersectionNode(firstNode:secondNode:)"
+            startingLineNumber = "339"
+            endingLineNumber = "339"
+            landmarkName = "firstIntoCicleNode(headNode:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "505C6314-3CDB-41A6-9C50-73BB7B293A1A"
+            uuid = "F03A9E1A-C232-4318-ABE3-AAA47431ECFE"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AlgorithmProject/Page/LB.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
-            landmarkName = "getIntersectionNode(firstNode:secondNode:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1ABB248B-D724-4A26-9B72-91FC7AE644EA"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AlgorithmProject/Page/LB.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
-            landmarkName = "getIntersectionNode(firstNode:secondNode:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7EF5747A-E2BF-4F56-87FE-1C0938B91F77"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AlgorithmProject/Page/LB.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
-            landmarkName = "getIntersectionNode(firstNode:secondNode:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0C84F6DA-4F76-4214-B9C4-40081C623EA9"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "AlgorithmProject/Page/LB.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
-            landmarkName = "getIntersectionNode(firstNode:secondNode:)"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
+            landmarkName = "reverseList(headNode:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
