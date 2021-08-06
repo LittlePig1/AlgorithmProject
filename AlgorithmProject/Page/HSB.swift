@@ -26,6 +26,10 @@ class HSB: UIViewController {
 
         let target = 19
         print("是否是快乐数\(isHappyNum(target))")
+        
+        let nums = [2, 7, 11, 15], target1 = 9
+        print("下标\(twoSum(nums, target1))")
+
     }
     /*
      给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。
@@ -147,7 +151,15 @@ class HSB: UIViewController {
      所以返回 [0, 1]
      */
     fileprivate func twoSum(_ array: [Int], _ target: Int) -> [Int] {
-        
-        return array
+        var indexArray = [Int]()
+        for (index, item) in array.enumerated() {
+            for index1 in index ..< array.count {
+                if item + array[index1] == target {
+                    indexArray.append(index)
+                    indexArray.append(index1)
+                }
+            }
+        }
+        return indexArray
     }
 }
