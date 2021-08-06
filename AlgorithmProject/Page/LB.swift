@@ -199,7 +199,7 @@ class LB: UIViewController {
             var temFirstNode = temNode
             var temSecondNode = secondNode
             while secondLength > 0 {
-                if sg_equateableAnyObject(object1: temFirstNode, object2: temSecondNode) {
+                if  temFirstNode === temSecondNode {
                     return temFirstNode
                 } else {
                     if let node1 = temFirstNode.next, let node2 = temSecondNode.next {
@@ -220,7 +220,7 @@ class LB: UIViewController {
             var temFirstNode = firstNode
             var temSecondNode = temNode
             while firstLength > 0 {
-                if sg_equateableAnyObject(object1: temFirstNode, object2: temSecondNode) {
+                if  temFirstNode === temSecondNode {
                     return temFirstNode
                 } else {
                     if let node1 = temFirstNode.next, let node2 = temSecondNode.next {
@@ -233,26 +233,7 @@ class LB: UIViewController {
         }
         
         return nil
-    }
-    
-    // 取出某个对象的地址
-    func sg_getAnyObjectMemoryAddress(object: AnyObject) -> String {
-        let str = Unmanaged<AnyObject>.passUnretained(object).toOpaque()
-        return String(describing: str)
-    }
-     
-    // 对比两个对象的地址是否相同
-    func sg_equateableAnyObject(object1: AnyObject, object2: AnyObject) -> Bool {
-        let str1 = sg_getAnyObjectMemoryAddress(object: object1)
-        let str2 = sg_getAnyObjectMemoryAddress(object: object2)
-        
-        if str1 == str2 {
-            return true
-        } else {
-            return false
-        }
-    }
-    
+    }    
     /*
      给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。
 
@@ -331,7 +312,7 @@ class LB: UIViewController {
                 return nil
             }
             // 获取相遇的节点
-            if sg_equateableAnyObject(object1: fastNode, object2: slowNode) {
+            if fastNode === slowNode {
                 meetNode = fastNode
                 break
             }
@@ -347,7 +328,7 @@ class LB: UIViewController {
                 meetNode = node
             }
             // 获取相遇的节点
-            if sg_equateableAnyObject(object1: otherNode, object2: meetNode!) {
+            if otherNode === meetNode {
                 inNode = meetNode
                 break
             }
