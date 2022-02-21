@@ -29,6 +29,9 @@ class HSB: UIViewController {
         
         let nums = [2, 7, 11, 15], target1 = 9
         print("下标\(twoSum(nums, target1))")
+        
+        let threeSums = [-6, 1, 2, 4, 5]
+        print("三元组集合\(threeSum(threeSums))")
 
     }
     /*
@@ -133,9 +136,32 @@ class HSB: UIViewController {
      6^2 + 8^2 = 100
      1^2 + 0^2 + 0^2 = 1
      */
-    fileprivate func isHappyNum(_ a: Int) -> Bool {
-        
-        return false
+    fileprivate func getSum(_ number: Int) -> Int {
+        var sum = 0
+        var num = number
+        while num > 0 {
+            let temp = num % 10
+            sum += (temp * temp)
+            num /= 10
+        }
+        return sum
+    }
+    fileprivate func isHappyNum(_ n: Int) -> Bool {
+        var set = Set<Int>()
+        var num = n
+        while true {
+            let sum = self.getSum(num)
+            if sum == 1 {
+                return true
+            }
+            // 如果这个sum曾经出现过，说明已经陷入了无限循环了
+            if set.contains(sum) {
+                return false
+            } else {
+                set.insert(sum)
+            }
+            num = sum
+        }
     }
     /*
      给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
@@ -150,16 +176,128 @@ class HSB: UIViewController {
 
      所以返回 [0, 1]
      */
-    fileprivate func twoSum(_ array: [Int], _ target: Int) -> [Int] {
-        var indexArray = [Int]()
-        for (index, item) in array.enumerated() {
-            for index1 in index ..< array.count {
-                if item + array[index1] == target {
-                    indexArray.append(index)
-                    indexArray.append(index1)
+    fileprivate func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+        // 值: 下标
+        var map = [Int: Int]()
+        for (i, e) in nums.enumerated() {
+            if let v = map[target - e] {
+                return [v, i]
+            } else {
+                map[e] = i
+            }
+        }
+        return []
+    }
+    /*
+     给定四个包含整数的数组列表 A , B , C , D ,计算有多少个元组 (i, j, k, l) ，使得 A[i] + B[j] + C[k] + D[l] = 0。
+
+     为了使问题简单化，所有的 A, B, C, D 具有相同的长度 N，且 0 ≤ N ≤ 500 。所有整数的范围在 -2^28 到 2^28 - 1 之间，最终结果不会超过 2^31 - 1 。
+
+     例如:
+
+     输入: A = [ 1, 2] B = [-2,-1] C = [-1, 2] D = [ 0, 2] 输出: 2 解释: 两个元组如下:
+
+     (0, 0, 0, 1) -> A[0] + B[0] + C[0] + D[1] = 1 + (-2) + (-1) + 2 = 0
+     (1, 1, 0, 0) -> A[1] + B[1] + C[0] + D[0] = 2 + (-1) + (-1) + 0 = 0
+     */
+    fileprivate func fourSumCount(_ nums1: [Int], _ nums2: [Int], _ nums3: [Int], _ nums4: [Int]) -> Int {
+        // 字典解释 [ab和: ab和出现次数]
+        var countDic = [Int: Int]()
+        for a in nums1 {
+            for b in nums2 {
+                let key = a + b
+                countDic[key] = countDic[key, default: 0] + 1
+            }
+        }
+        // 通过-(c + d)作为key，去累加ab和出现的次数
+        var result = 0
+        for c in nums3 {
+            for d in nums4 {
+                let key = -(c + d)
+                result += countDic[key, default: 0]
+            }
+        }
+        return result
+    }
+    /*
+     给定一个赎金信 (ransom) 字符串和一个杂志(magazine)字符串，判断第一个字符串 ransom 能不能由第二个字符串 magazines 里面的字符构成。如果可以构成，返回 true ；否则返回 false。
+
+     (题目说明：为了不暴露赎金信字迹，要从杂志上搜索各个需要的字母，组成单词来表达意思。杂志字符串中的每个字符只能在赎金信字符串中使用一次。)
+
+     注意：
+
+     你可以假设两个字符串均只含有小写字母。
+
+     canConstruct("a", "b") -> false
+     canConstruct("aa", "ab") -> false
+     canConstruct("aa", "aab") -> true
+     */
+    func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
+        var record = Array(repeating: 0, count: 26);
+        let aUnicodeScalarValue = "a".unicodeScalars.first!.value
+        for unicodeScalar in magazine.unicodeScalars {
+            // 通过record 记录 magazine 里各个字符出现的次数
+            let idx: Int = Int(unicodeScalar.value - aUnicodeScalarValue)
+            record[idx] += 1
+        }
+            
+        for unicodeScalar in ransomNote.unicodeScalars {
+            // 遍历 ransomNote,在record里对应的字符个数做 -- 操作
+            let idx: Int = Int(unicodeScalar.value - aUnicodeScalarValue)
+            record[idx] -= 1
+            // 如果小于零说明在magazine没有
+            if record[idx] < 0 {
+                return false
+            }
+        }
+        return true
+    }
+    /*
+     给你一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有满足条件且不重复的三元组。
+
+     注意： 答案中不可以包含重复的三元组。
+
+     示例：
+
+     给定数组 nums = [-1, 0, 1, 2, -1, -4]，
+
+     满足要求的三元组集合为： [ [-1, 0, 1], [-1, -1, 2] ]
+     */
+    // 双指针法
+    func threeSum(_ nums: [Int]) -> [[Int]] {
+        var res = [[Int]]()
+        var sorted = nums
+        sorted.sort()
+        for i in 0 ..< sorted.count {
+            if sorted[i] > 0 {
+                return res
+            }
+            if i > 0 && sorted[i] == sorted[i - 1] {
+                continue
+            }
+            var left = i + 1
+            var right = sorted.count - 1
+            while left < right {
+                let sum = sorted[i] + sorted[left] + sorted[right]
+                if sum < 0 {
+                    left += 1
+                } else if sum > 0 {
+                    right -= 1
+                } else {
+                    res.append([sorted[i], sorted[left], sorted[right]])
+                        
+                    while left < right && sorted[left] == sorted[left + 1] {
+                        left += 1
+                    }
+                    while left < right && sorted[right] == sorted[right - 1] {
+                        right -= 1
+                    }
+                        
+                    left += 1
+                    right -= 1
                 }
             }
         }
-        return indexArray
+        return res
     }
 }

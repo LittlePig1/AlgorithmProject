@@ -15,9 +15,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "134"
-            endingLineNumber = "134"
-            landmarkName = "qucikSort(_:_:_:)"
-            landmarkType = "7">
+            endingLineNumber = "134">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -31,9 +29,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "partition(_:_:_:)"
-            landmarkType = "7">
+            endingLineNumber = "152">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -47,9 +43,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "130"
-            endingLineNumber = "130"
-            landmarkName = "qucikSort(_:_:_:)"
-            landmarkType = "7">
+            endingLineNumber = "130">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -63,9 +57,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "136"
-            endingLineNumber = "136"
-            landmarkName = "qucikSort(_:_:_:)"
-            landmarkType = "7">
+            endingLineNumber = "136">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
