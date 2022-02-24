@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     let dataSource = ["数组", "链表", "哈希表", "字符串", "双指针法", "栈与队列", "二叉树", "回溯算法", "贪心算法", "动态规划", "单调栈", "补充题目"]
-    let nameDataSource = ["SZ", "LB", "HSB", "ZFC", "SZZ", "ZYDL", "ECS", "HSSF", "TXSF", "DTGH", "DDZ", "BCTM"]
+    let nameDataSource = ["SZ", "LB", "HXB", "ZFC", "SZZ", "ZYDL", "ECS", "HSSF", "TXSF", "DTGH", "DDZ", "BCTM"]
     lazy var list: UITableView = {
         let list = UITableView(frame:UIScreen.main.bounds,
                                style: .plain)
