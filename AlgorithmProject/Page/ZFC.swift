@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ZFC: UIViewController {
+class ZFC: BaseController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +25,14 @@ class ZFC: UIViewController {
         
         let s2 = "   We     are happy.  "
         print("第四题：\(self.reverseWords(s2))")
+        
+        let s3 = "lrloseumgh"
+        let k1 = 6
+        print("第五题：\(self.reverseString1(s3, k1))")
+        
+        let s4 = "hello"
+        let s5 = "ll"
+        print("第六题：\(self.strStr(s4, s5))")
     }
     /*
      编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 char[] 的形式给出。
@@ -215,4 +223,124 @@ class ZFC: UIViewController {
             }
         }
     }
+    /*
+     字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。比如，输入字符串"abcdefg"和数字2，该函数将返回左旋转两位得到的结果"cdefgab"。
+
+     示例 1：
+     输入: s = "abcdefg", k = 2
+     输出: "cdefgab"
+
+     示例 2：
+     输入: s = "lrloseumgh", k = 6
+     输出: "umghlrlose"
+
+     限制：
+     1 <= k < s.length <= 10000
+     */
+    func reverseString1(_ s: String, _ k: NSInteger) -> String{
+        var chArray = Array(s)
+        /// 为了 不额外申请 空间 可以这么做
+        /// 1、反转区间为前n的子串 2、反转区间为n到末尾的子串 3、反转整个字符串
+        var left1 = 0
+        var right1 = k - 1
+        while left1 < right1 {
+            (chArray[left1], chArray[right1]) = (chArray[right1], chArray[left1])
+            left1 += 1
+            right1 -= 1
+        }
+        
+        var left2 = k
+        var right2 = s.count - 1
+        while left2 < right2 {
+            (chArray[left2], chArray[right2]) = (chArray[right2], chArray[left2])
+            left2 += 1
+            right2 -= 1
+        }
+        
+        var left3 = 0
+        var right3 = s.count - 1
+        while left3 < right3 {
+            (chArray[left3], chArray[right3]) = (chArray[right3], chArray[left3])
+            left3 += 1
+            right3 -= 1
+        }
+        
+        return String(chArray)
+    }
+    /*
+     实现 strStr() 函数。
+
+     给定一个 haystack 字符串和一个 needle 字符串，在 haystack 字符串中找出 needle 字符串出现的第一个位置 (从0开始)。如果不存在，则返回  -1。
+
+     示例 1: 输入: haystack = "hello", needle = "ll" 输出: 2
+
+     示例 2: 输入: haystack = "aaaaa", needle = "bba" 输出: -1
+
+     说明: 当 needle 是空字符串时，我们应当返回什么值呢？这是一个在面试中很好的问题。 对于本题而言，当 needle 是空字符串时我们应当返回 0 。这与C语言的 strstr() 以及 Java的 indexOf() 定义相符。
+     
+     涉及 KMP
+     */
+    func strStr(_ haystack: String, _ needle: String) -> Int {
+        
+        let s = Array(haystack), p = Array(needle)
+        guard p.count != 0 else { return 0 }
+        
+        // 2 pointer
+        var j = -1
+        var next = [Int](repeating: -1, count: needle.count)
+        // KMP
+        getNext(&next, needle: p)
+        for i in 0 ..< s.count {
+            while j >= 0 && s[i] != p[j + 1] {
+                //不匹配之后寻找之前匹配的位置
+                j = next[j]
+            }
+            if s[i] == p[j + 1] {
+                //匹配，双指针同时后移
+                j += 1
+            }
+            if j == (p.count - 1) {
+                //出现匹配字符串
+                return i - p.count + 1
+            }
+        }
+        return -1
+    }
+
+    //前缀表统一减一
+    func getNext(_ next: inout [Int], needle: [Character]) {
+        
+        var j: Int = -1
+        next[0] = j
+        
+        // i 从 1 开始
+        for i in 1 ..< needle.count {
+            while j >= 0 && needle[i] != needle[j + 1] {
+                j = next[j]
+            }
+            if needle[i] == needle[j + 1] {
+                j += 1;
+            }
+            next[i] = j
+        }
+        print(next)
+    }
+    /*
+     给定一个非空的字符串，判断它是否可以由它的一个子串重复多次构成。给定的字符串只含有小写英文字母，并且长度不超过10000。
+
+     示例 1:
+     输入: "abab"
+     输出: True
+     解释: 可由子字符串 "ab" 重复两次构成。
+
+     示例 2:
+     输入: "aba"
+     输出: False
+
+     示例 3:
+     输入: "abcabcabcabc"
+     输出: True
+     解释: 可由子字符串 "abc" 重复四次构成。 (或者子字符串 "abcabc" 重复两次构成。)
+     */
+    
 }
